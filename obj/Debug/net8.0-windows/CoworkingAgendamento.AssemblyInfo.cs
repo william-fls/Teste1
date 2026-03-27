@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CoworkingAgendamento")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bbff27b9822da455abf08f53ee73c271f075d1ee")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a9b04e1bdd39544746a4dcff2342ff75d25dda50")]
 [assembly: System.Reflection.AssemblyProductAttribute("CoworkingAgendamento")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CoworkingAgendamento")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

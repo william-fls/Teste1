@@ -51,7 +51,7 @@ BEGIN
     ) THEN
         ALTER TABLE agendamento
             ADD CONSTRAINT fk_agendamento_sala
-            FOREIGN KEY (sala_id) REFERENCES sala(id) ON DELETE CASCADE;
+            FOREIGN KEY (sala_id) REFERENCES sala(id) ON DELETE RESTRICT;
     END IF;
 END $$;
 
