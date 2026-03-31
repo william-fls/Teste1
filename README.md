@@ -87,6 +87,6 @@ dotnet run --project .\\CoworkingAgendamento.csproj
 
 ## Observacoes
 
-- O repositorio foi limpo para GitHub e nao deve versionar `bin/`, `obj/`, `.dotnet/` ou `.nuget/`.
+- O repositorio foi limpo para GitHub e nao tem `bin/`, `obj/`, `.dotnet/` ou `.nuget/`.
 - O arquivo obrigatorio do teste para criacao do banco esta em `script.sql`.
 - A aplicacao aceita a variavel `COWORKING_CONNECTION_STRING` ou um arquivo local `connection-string.txt`; nao ha senha hardcoded no codigo.
