@@ -1,6 +1,7 @@
 using CoworkingAgendamento.Data;
 using CoworkingAgendamento.Models;
 using Npgsql;
+using NpgsqlTypes;
 
 namespace CoworkingAgendamento.Repositories;
 
@@ -34,7 +35,7 @@ public class AgendamentoRepository
         using var conn = Database.GetConnection();
         using var cmd = new NpgsqlCommand(
             "INSERT INTO agendamento (sala_id, inicio, fim) VALUES (@sala, @ini, @fim)", conn);
-        cmd.Parameters.AddWithValue("sala", a.SalaId);
+        AddSalaIdParameter(cmd, a.SalaId);
         cmd.Parameters.AddWithValue("ini",  a.Inicio);
         cmd.Parameters.AddWithValue("fim",  a.Fim);
         cmd.ExecuteNonQuery();
@@ -45,7 +46,7 @@ public class AgendamentoRepository
         using var conn = Database.GetConnection();
         using var cmd = new NpgsqlCommand(
             "UPDATE agendamento SET sala_id=@sala, inicio=@ini, fim=@fim WHERE id=@id", conn);
-        cmd.Parameters.AddWithValue("sala", a.SalaId);
+        AddSalaIdParameter(cmd, a.SalaId);
         cmd.Parameters.AddWithValue("ini",  a.Inicio);
         cmd.Parameters.AddWithValue("fim",  a.Fim);
         cmd.Parameters.AddWithValue("id",   a.Id);
@@ -58,5 +59,11 @@ public class AgendamentoRepository
         using var cmd = new NpgsqlCommand("DELETE FROM agendamento WHERE id = @id", conn);
         cmd.Parameters.AddWithValue("id", id);
         cmd.ExecuteNonQuery();
+    }
+
+    private static void AddSalaIdParameter(NpgsqlCommand cmd, int? salaId)
+    {
+        cmd.Parameters.Add("sala", NpgsqlDbType.Integer).Value =
+            salaId is int value ? value : DBNull.Value;
     }
 }

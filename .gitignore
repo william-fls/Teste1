@@ -3,13 +3,16 @@
 # Build Folders
 bin/
 obj/
+.dotnet/
+.nuget/
 
 # Visual Studio files
 *.suo
 *.user
 *.userprefs
-*.Ds_store
+*.DS_Store
 *.sln.docstates
+.vs/
 
 # User-specific files
 *.csproj.user
@@ -19,3 +22,9 @@ obj/
 
 # Visual Studio Code
 .vscode/
+
+# Temporary files
+*.log
+
+# Local database configuration
+connection-string.txt

@@ -1,6 +1,5 @@
 using System.Drawing;
 using System.Windows.Forms;
-using CoworkingAgendamento.Data;
 
 namespace CoworkingAgendamento.Forms;
 
@@ -12,18 +11,20 @@ public class MainForm : Form
         IsMdiContainer = true;
         WindowState = FormWindowState.Maximized;
         MinimumSize = new Size(1000, 700);
-        BackColor = Color.FromArgb(240, 244, 248);
+        BackColor = UiTheme.PageBackground;
+        AutoScaleMode = AutoScaleMode.Dpi;
 
         BuildMenu();
+        BuildHeader();
     }
 
     private void BuildMenu()
     {
         var menu = new MenuStrip
         {
-            BackColor = Color.FromArgb(30, 80, 160),
+            BackColor = UiTheme.BrandDark,
             ForeColor = Color.White,
-            Font = new Font("Segoe UI", 10f, FontStyle.Regular),
+            Font = UiTheme.Font(10f, FontStyle.Bold),
             Dock = DockStyle.Top
         };
 
@@ -44,6 +45,34 @@ public class MainForm : Form
 
         MainMenuStrip = menu;
         Controls.Add(menu);
+    }
+
+    private void BuildHeader()
+    {
+        var painel = UiTheme.CreateCardPanel(96);
+        painel.Padding = new Padding(24, 18, 24, 18);
+
+        var lblTitulo = new Label
+        {
+            Text = "Painel de agendamentos",
+            AutoSize = true,
+            Font = UiTheme.Font(18f, FontStyle.Bold),
+            ForeColor = UiTheme.BrandDark,
+            Location = new Point(24, 18)
+        };
+
+        var lblDescricao = new Label
+        {
+            Text = "Abra as telas de salas e agendamentos pelo menu superior para gerenciar o coworking.",
+            AutoSize = true,
+            Font = UiTheme.Font(10f),
+            ForeColor = UiTheme.TextMuted,
+            Location = new Point(24, 52)
+        };
+
+        painel.Controls.Add(lblTitulo);
+        painel.Controls.Add(lblDescricao);
+        Controls.Add(painel);
     }
 
     private void AbrirFilho<TForm>() where TForm : Form, new()
