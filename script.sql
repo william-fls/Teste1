@@ -114,6 +114,17 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION fn_verificar_exclusao_agendamento()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF OLD.fim > NOW() THEN
+        RAISE EXCEPTION 'Nao e possivel excluir um agendamento futuro.';
+    END IF;
+
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
 DROP TRIGGER IF EXISTS trg_log_sala ON sala;
 CREATE TRIGGER trg_log_sala
 AFTER INSERT OR UPDATE OR DELETE ON sala
@@ -137,3 +148,9 @@ CREATE TRIGGER trg_exclusao_sala
 BEFORE DELETE ON sala
 FOR EACH ROW
 EXECUTE FUNCTION fn_verificar_exclusao_sala();
+
+DROP TRIGGER IF EXISTS trg_exclusao_agendamento ON agendamento;
+CREATE TRIGGER trg_exclusao_agendamento
+BEFORE DELETE ON agendamento
+FOR EACH ROW
+EXECUTE FUNCTION fn_verificar_exclusao_agendamento();

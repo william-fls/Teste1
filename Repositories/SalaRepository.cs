@@ -36,6 +36,22 @@ public class SalaRepository
         cmd.ExecuteNonQuery();
     }
 
+    public bool PossuiAgendamentoFuturo(int id)
+    {
+        using var conn = Database.GetConnection();
+        using var cmd = new NpgsqlCommand(
+            """
+            SELECT EXISTS (
+                SELECT 1
+                FROM agendamento
+                WHERE sala_id = @id
+                  AND fim > NOW()
+            )
+            """, conn);
+        cmd.Parameters.AddWithValue("id", id);
+        return (bool)(cmd.ExecuteScalar() ?? false);
+    }
+
     public void Excluir(int id)
     {
         using var conn = Database.GetConnection();

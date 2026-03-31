@@ -150,6 +150,14 @@ public class SalaForm : Form
             return;
         }
 
+        if (_repo.PossuiAgendamentoFuturo(_idSelecionado))
+        {
+            UiFeedback.ShowInfo(
+                "Nao e possivel excluir a sala selecionada, pois ela possui agendamento futuro.",
+                "Exclusao de sala");
+            return;
+        }
+
         if (!UiFeedback.Confirm("Deseja excluir a sala selecionada?", "Exclusao de sala"))
             return;
 

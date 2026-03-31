@@ -217,6 +217,14 @@ public class AgendamentoForm : Form
             return;
         }
 
+        if (_repo.PossuiPeriodoFuturo(_idSelecionado))
+        {
+            UiFeedback.ShowInfo(
+                "Nao e possivel excluir o agendamento selecionado, pois ele ainda possui data/hora futura.",
+                "Exclusao de agendamento");
+            return;
+        }
+
         if (!UiFeedback.Confirm(
                 "Deseja excluir o agendamento selecionado?",
                 "Exclusao de agendamento"))
